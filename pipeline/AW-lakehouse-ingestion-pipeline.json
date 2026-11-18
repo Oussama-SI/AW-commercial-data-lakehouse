@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "AW-lakehouse-ingestion-pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -90,11 +90,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"SchemaName": {
-											"value": "@item().SchemaName",
+											"value": "@item().table_schema",
 											"type": "Expression"
 										},
 										"TaableName": {
-											"value": "@item().TableName",
+											"value": "@item().table_name",
 											"type": "Expression"
 										}
 									}
@@ -106,11 +106,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FolderName": {
-											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"value": "@concat('raw/', formatDateTime(utcNow(), 'yyyy-MM-dd'))",
 											"type": "Expression"
 										},
 										"FileName": {
-											"value": "@concat(item().SchemaName, '.', item().TableName, '.parquet')",
+											"value": "@concat(item().table_schema, '.', item().table_name, '.parquet')",
 											"type": "Expression"
 										}
 									}
