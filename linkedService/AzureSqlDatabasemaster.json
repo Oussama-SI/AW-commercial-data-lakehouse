@@ -1,0 +1,17 @@
+{
+	"name": "AzureSqlDatabasemaster",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "db-server-webelian-training.database.windows.net",
+			"database": "master",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "bourrous",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEZFRDhERDBBLUJEQzMtNEQ1NC05NEVDLTcxRTYzMzQ5MEY4Ml80ODc2NDRhOC1hNDAyLTRjZjgtOWZiMS1jZjI1NmE5MzdlMWIiDQp9"
+		}
+	}
+}
