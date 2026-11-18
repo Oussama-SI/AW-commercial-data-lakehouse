@@ -1,0 +1,20 @@
+{
+	"name": "SalesTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "commercial_db",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string"
+			},
+			"TaableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
