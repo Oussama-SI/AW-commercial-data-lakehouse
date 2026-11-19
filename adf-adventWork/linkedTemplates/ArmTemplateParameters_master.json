@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-adventWork"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"commercial_db_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sadbxoussama.dfs.core.windows.net/"
+		},
+		"commercial_db_properties_typeProperties_server": {
+			"value": "db-server-webelian-training.database.windows.net"
+		},
+		"commercial_db_properties_typeProperties_database": {
+			"value": "commercial-db"
+		},
+		"commercial_db_properties_typeProperties_userName": {
+			"value": "bourrous"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
