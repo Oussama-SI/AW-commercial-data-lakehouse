@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"AzureSqlDatabasemaster_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabasemaster'"
+		},
 		"commercial_db_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'commercial_db'"
@@ -18,6 +22,18 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sadbxoussama.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-server-webelian-training.database.windows.net"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "bourrous"
 		},
 		"commercial_db_properties_typeProperties_server": {
 			"type": "string",
@@ -61,11 +77,23 @@
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"AzureSqlDatabasemaster_password": {
+						"value": "[parameters('AzureSqlDatabasemaster_password')]"
+					},
 					"commercial_db_password": {
 						"value": "[parameters('commercial_db_password')]"
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureSqlDatabasemaster_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabasemaster_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabasemaster_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_userName')]"
 					},
 					"commercial_db_properties_typeProperties_server": {
 						"value": "[parameters('commercial_db_properties_typeProperties_server')]"

@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"AzureSqlDatabasemaster_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabasemaster'"
+		},
 		"commercial_db_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'commercial_db'"
@@ -18,6 +22,18 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sadbxoussama.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-server-webelian-training.database.windows.net"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "bourrous"
 		},
 		"commercial_db_properties_typeProperties_server": {
 			"type": "string",
@@ -48,6 +64,28 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabasemaster')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureSqlDatabasemaster_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabasemaster_password')]"
 					}
 				}
 			},
@@ -297,7 +335,8 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2026-11-19T14:11:02Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/commercial_db')]",

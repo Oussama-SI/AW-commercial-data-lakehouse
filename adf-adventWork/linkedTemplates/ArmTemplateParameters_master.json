@@ -8,11 +8,23 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
+		"AzureSqlDatabasemaster_password": {
+			"value": ""
+		},
 		"commercial_db_password": {
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://sadbxoussama.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_server": {
+			"value": "db-server-webelian-training.database.windows.net"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"AzureSqlDatabasemaster_properties_typeProperties_userName": {
+			"value": "bourrous"
 		},
 		"commercial_db_properties_typeProperties_server": {
 			"value": "db-server-webelian-training.database.windows.net"
