@@ -1,0 +1,13 @@
+{
+	"name": "commercial_db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "commercial_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
