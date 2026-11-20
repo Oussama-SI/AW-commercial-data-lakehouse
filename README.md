@@ -1,190 +1,374 @@
-AdventWork Commercial Data Lakehouse
 
-Building a modern, scalable, and reliable data platform for commercial analytics.
+# AdventWork Commercial Data Lakehouse
 
-Overview
+An end-to-end Azure Data Engineering project for building a modern, scalable, and reliable commercial data platform.
 
-The AdventWork Commercial Data Lakehouse is an end-to-end data engineering project designed to centralize, process, and transform commercial business data into reliable, analytics-ready datasets.
+---
 
-The platform integrates data from multiple commercial domains, including sales, products, inventory, purchases, and suppliers. It establishes a structured data foundation that supports data quality, scalable processing, and business intelligence.
+## Overview
 
-Built on Microsoft Azure, the solution combines Azure Data Factory, Azure Databricks, PySpark, Delta Lake, and dbt to implement a modern lakehouse architecture based on the Medallion Architecture.
+The **AdventWork Commercial Data Lakehouse** is designed to centralize, ingest, process, and transform commercial business data into structured, reliable, and analytics-ready datasets.
 
-Business Scope
+The platform integrates data across five core business domains:
 
-The lakehouse consolidates data across five core commercial domains:
+- **Sales:** Sales transactions, revenue, and commercial performance.
+- **Products:** Product information, categories, and attributes.
+- **Inventory:** Stock levels, quantities, and product availability.
+- **Purchases:** Procurement transactions and purchasing activities.
+- **Suppliers:** Supplier information and business relationships.
 
-Business Domain	Description
-Sales	Sales transactions, revenue, and commercial performance
-Products	Product information, categories, and attributes
-Stock Levels	Inventory quantities, stock availability, and levels
-Purchases	Procurement transactions and purchasing activities
-Suppliers	Supplier information and business relationships
+Built on Microsoft Azure, the solution leverages Azure Data Factory, Azure Databricks, PySpark, Delta Lake, and dbt to implement a modern lakehouse architecture based on the **Medallion Architecture**.
 
-The objective is to transform operational data into consistent, trusted datasets that can support analytical workloads and business reporting.
+The primary objective is to establish a centralized and scalable data platform that transforms operational business data into trusted, structured, and actionable insights.
 
-Architecture
+---
 
-The solution follows the Medallion Architecture, separating data processing into three logical layers.
+## Architecture
 
-1. Bronze Layer – Raw Data
+The solution follows the **Medallion Architecture**, organizing data processing into three logical layers:
 
-The Bronze layer stores source data ingested from Azure SQL Database.
+| Layer | Description | Purpose |
+|:---|:---|:---|
+| Bronze | Raw Data | Ingest and preserve source data with minimal transformation. |
+| Silver | Cleansed Data | Clean, standardize, validate, and transform raw datasets. |
+| Gold | Curated Data | Produce business-oriented models and analytics-ready datasets. |
 
-Key responsibilities:
+### Architecture Overview
 
-Extract data from source systems.
-Support incremental data ingestion.
-Preserve raw source records.
-Maintain traceability and ingestion metadata.
-Store data in Delta Lake format.
-2. Silver Layer – Cleansed and Standardized Data
-
-The Silver layer transforms raw data into structured and reliable datasets.
-
-Key responsibilities:
-
-Data cleansing and standardization.
-Schema enforcement and validation.
-Handling missing and inconsistent values.
-Data type normalization.
-Deduplication and transformation.
-Maintaining data quality.
-3. Gold Layer – Business-Ready Data
-
-The Gold layer contains curated datasets designed for business consumption and analytics.
-
-Key responsibilities:
-
-Business-oriented data modeling.
-Fact and dimension modeling where appropriate.
-Aggregations and analytical transformations.
-Integration of commercial business domains.
-Delivery of analytics-ready datasets.
-Technology Stack
-Category	Technology	Purpose
-Cloud Platform	Microsoft Azure	Cloud infrastructure
-Source Database	Azure SQL Database	Operational data source
-Data Integration	Azure Data Factory	Data ingestion and orchestration
-Data Processing	Azure Databricks	Distributed data processing
-Processing Language	Python / PySpark	Data engineering and transformations
-Storage Format	Delta Lake	Reliable lakehouse storage
-Data Transformation	dbt	SQL-based modeling and transformations
-Data Quality	dbt Tests / PySpark	Data validation and quality checks
-Architecture	Medallion Architecture	Layered data organization
-End-to-End Data Pipeline
-
-The overall data flow is organized as follows:
-
-text
+```text
                  SOURCE SYSTEM
-                Azure SQL Database
-                        |
-                        v
-               AZURE DATA FACTORY
-              Ingestion & Orchestration
-                        |
-                        v
-                AZURE DATABRICKS
-                        |
-                        v
-              +-------------------+
-              |   BRONZE LAYER    |
-              |   Raw Delta Data  |
-              +-------------------+
-                        |
-                        v
-              +-------------------+
-              |   SILVER LAYER    |
-              | Cleansed & Validated
-              |   Delta Data      |
-              +-------------------+
-                        |
-                        v
-              +-------------------+
-              |    GOLD LAYER     |
-              | Business-Oriented |
-              |    Data Models    |
-              +-------------------+
-                        |
-                        v
-                       dbt
-             Modeling, Testing &
-                Documentation
-                        |
-                        v
-              ANALYTICS-READY DATA
+              +------------------+
+              |   Azure SQL DB   |
+              +------------------+
+                       |
+                       v
+              +------------------+
+              | Azure Data       |
+              | Factory (ADF)    |
+              +------------------+
+                       |
+                       v
+              +------------------+
+              | Azure Databricks |
+              |    PySpark       |
+              +------------------+
+                       |
+                       v
+        +--------------------------------+
+        |          BRONZE LAYER          |
+        |           Raw Data             |
+        |                                |
+        |  - Original source data        |
+        |  - Initial ingestion           |
+        |  - Historical preservation    |
+        +--------------------------------+
+                       |
+                       v
+        +--------------------------------+
+        |          SILVER LAYER          |
+        |    Cleansed & Standardized     |
+        |                                |
+        |  - Data cleansing              |
+        |  - Schema standardization      |
+        |  - Data validation             |
+        |  - Deduplication               |
+        +--------------------------------+
+                       |
+                       v
+        +--------------------------------+
+        |           GOLD LAYER           |
+        |       Curated Data Models      |
+        |                                |
+        |  - Business transformations    |
+        |  - Aggregations                |
+        |  - Analytical datasets         |
+        +--------------------------------+
+                       |
+                       v
+              +------------------+
+              |       dbt        |
+              | Data Modeling    |
+              | Testing & Docs   |
+              +------------------+
+                       |
+                       v
+              +------------------+
+              | Analytics-Ready  |
+              |     Datasets     |
+              +------------------+
+                       |
+                       v
+              Business Intelligence
+                & Reporting
+```
 
+### Medallion Architecture Layers
 
-Note: This represents the logical processing architecture. The exact execution responsibilities of Databricks and dbt may evolve during implementation.
+#### 1. Bronze Layer – Raw Data
 
-Key Engineering Capabilities
+The Bronze layer represents the initial landing zone for data ingested from Azure SQL Database.
 
-The project focuses on implementing the following data engineering capabilities:
+Its purpose is to preserve source data while maintaining its original structure and historical information.
 
-Automated Data Ingestion: Orchestrated ingestion workflows connecting Azure SQL Database to the lakehouse.
-Incremental Processing: Loading new and modified records while minimizing unnecessary data processing.
-Scalable Transformations: Distributed data processing using Azure Databricks and PySpark.
-Data Quality Management: Validation, standardization, and consistency checks across processing layers.
-Lakehouse Storage: Delta Lake-based storage for reliable and structured data management.
-Data Modeling: Business-oriented transformations using dbt.
-Documentation and Testing: Documented models and automated data quality tests.
-Repository Structure
+Key responsibilities:
 
-The repository is organized by technology and processing responsibility to maintain separation of concerns and simplify development.
+- Ingest raw source data.
+- Preserve original records.
+- Maintain source schema information.
+- Support incremental data ingestion.
+- Store data using Delta Lake format.
+- Provide a reliable foundation for downstream processing.
 
-text
+#### 2. Silver Layer – Cleansed Data
+
+The Silver layer transforms raw data into clean, consistent, and standardized datasets.
+
+Key responsibilities:
+
+- Handle missing and null values.
+- Remove duplicate records.
+- Standardize data types and formats.
+- Apply data validation rules.
+- Enforce data consistency.
+- Perform business-related data transformations.
+- Maintain reliable and reusable datasets.
+
+#### 3. Gold Layer – Curated Data
+
+The Gold layer contains business-oriented datasets designed for analytical consumption.
+
+Key responsibilities:
+
+- Create curated business datasets.
+- Implement analytical transformations.
+- Generate business-level aggregations.
+- Prepare datasets for reporting.
+- Support commercial performance analysis.
+- Deliver trusted data for business intelligence.
+
+---
+
+## Data Pipeline
+
+The data pipeline follows an end-to-end architecture that connects source systems to analytics-ready datasets.
+
+### Pipeline Workflow
+
+1. **Source Extraction:** Extract commercial data from Azure SQL Database.
+2. **Data Ingestion:** Use Azure Data Factory to orchestrate ingestion workflows.
+3. **Data Processing:** Leverage Azure Databricks and PySpark for distributed processing.
+4. **Bronze Processing:** Store ingested data in its raw form using Delta Lake.
+5. **Silver Processing:** Clean, validate, standardize, and transform datasets.
+6. **Gold Processing:** Generate curated and business-oriented datasets.
+7. **Data Modeling:** Use dbt to implement analytical models, tests, and documentation.
+8. **Analytics Consumption:** Deliver analytics-ready datasets for reporting and business intelligence.
+
+---
+
+## Technology Stack
+
+The project uses the following technologies:
+
+| Category | Technology |
+|:---|:---|
+| Cloud Platform | Microsoft Azure |
+| Source Database | Azure SQL Database |
+| Data Integration | Azure Data Factory |
+| Data Processing | Azure Databricks |
+| Programming Languages | Python, PySpark, SQL |
+| Storage Format | Delta Lake |
+| Data Transformation | dbt |
+| Data Architecture | Medallion Architecture |
+| Data Orchestration | Azure Data Factory |
+| Data Quality | dbt Tests and PySpark Validation |
+| Data Modeling | dbt |
+
+### Technology Overview
+
+- **Microsoft Azure:** Provides the cloud infrastructure for the data platform.
+- **Azure SQL Database:** Acts as the primary source of commercial business data.
+- **Azure Data Factory:** Manages and orchestrates data ingestion pipelines.
+- **Azure Databricks:** Provides the distributed processing environment.
+- **PySpark:** Implements scalable data transformations and processing logic.
+- **Delta Lake:** Provides reliable storage with transactional capabilities.
+- **dbt:** Supports analytical data modeling, testing, and documentation.
+
+---
+
+## Business Domains
+
+The lakehouse integrates five core commercial business domains.
+
+### 1. Sales
+
+Focuses on commercial transactions and sales performance.
+
+Expected data includes:
+
+- Sales transactions.
+- Sales order information.
+- Revenue.
+- Product sales.
+- Commercial performance.
+
+### 2. Products
+
+Contains product-related information and attributes.
+
+Expected data includes:
+
+- Product details.
+- Product categories.
+- Product subcategories.
+- Product attributes.
+- Product classifications.
+
+### 3. Inventory
+
+Provides information about product availability and stock management.
+
+Expected data includes:
+
+- Inventory quantities.
+- Stock levels.
+- Product availability.
+- Inventory movements.
+- Stock monitoring.
+
+### 4. Purchases
+
+Focuses on procurement activities and purchasing transactions.
+
+Expected data includes:
+
+- Purchase transactions.
+- Purchase orders.
+- Procurement information.
+- Purchasing quantities.
+- Purchase history.
+
+### 5. Suppliers
+
+Contains information about suppliers and their business relationships.
+
+Expected data includes:
+
+- Supplier information.
+- Supplier identification.
+- Supplier details.
+- Supplier relationships.
+- Procurement-related information.
+
+---
+
+## Repository Structure
+
+The repository follows a modular structure to separate orchestration, data processing, transformation, and documentation.
+
+```text
 adventwork-commercial-data-lakehouse/
 │
 ├── adf/
 │   └── pipelines/
+│       └── README.md
 │
 ├── databricks/
+│   │
 │   ├── bronze/
+│   │   └── README.md
+│   │
 │   ├── silver/
+│   │   └── README.md
+│   │
 │   └── gold/
+│       └── README.md
 │
 ├── dbt/
+│   │
 │   ├── models/
+│   │
 │   ├── tests/
+│   │
 │   ├── macros/
+│   │
 │   └── dbt_project.yml
 │
 ├── docs/
 │   └── architecture/
+│       └── README.md
 │
 └── README.md
+```
 
+### Directory Description
 
-Directory responsibilities:
+| Directory | Description |
+|:---|:---|
+| `adf/pipelines/` | Contains Azure Data Factory pipeline definitions and orchestration configurations. |
+| `databricks/bronze/` | Contains notebooks and scripts for raw data ingestion. |
+| `databricks/silver/` | Contains notebooks and scripts for data cleansing and standardization. |
+| `databricks/gold/` | Contains notebooks and scripts for curated business datasets. |
+| `dbt/models/` | Contains analytical data models. |
+| `dbt/tests/` | Contains data quality and validation tests. |
+| `dbt/macros/` | Contains reusable SQL macros. |
+| `docs/architecture/` | Contains architecture diagrams and technical documentation. |
 
-Directory	Responsibility
-adf/	Azure Data Factory pipeline definitions
-databricks/bronze/	Raw ingestion and Bronze transformations
-databricks/silver/	Cleansing and standardization
-databricks/gold/	Curated business transformations
-dbt/	Data models, tests, and macros
-docs/	Architecture documentation and technical references
-Project Objectives
+---
 
-The primary objectives are to:
+## Project Objectives
 
-Build a scalable and maintainable cloud-based data engineering platform.
-Centralize commercial business data into a unified lakehouse.
-Establish reliable and incremental data ingestion processes.
-Improve data quality through structured validation and transformation.
-Implement layered data processing using the Medallion Architecture.
-Develop trusted, analytics-ready datasets for business intelligence.
-Project Status
+The main objectives of this project are to:
 
-Currently in development.
+1. Build a scalable and maintainable cloud-based data platform.
+2. Centralize commercial business data into a unified lakehouse.
+3. Establish reliable and incremental ingestion workflows.
+4. Improve data quality through structured validation and transformation.
+5. Organize data using a layered Medallion Architecture.
+6. Implement distributed data processing using PySpark.
+7. Deliver trusted datasets for reporting and business analytics.
+8. Establish reusable and maintainable analytical data models.
 
-The project is being developed incrementally, with a focus on establishing the cloud architecture, implementing ingestion workflows, building the Medallion layers, and developing business-oriented data models.
+---
 
-Vision
+### Development Roadmap
 
-Establish a reliable commercial data foundation that transforms operational business data into structured, trusted, and actionable information.
+- [ ] Define the overall lakehouse architecture.
+- [ ] Configure the Azure environment.
+- [ ] Prepare the Azure SQL Database source.
+- [ ] Implement Azure Data Factory pipelines.
+- [ ] Develop Bronze layer ingestion workflows.
+- [ ] Implement incremental data loading.
+- [ ] Develop Silver layer transformations.
+- [ ] Implement data cleansing and validation.
+- [ ] Develop Gold layer curated datasets.
+- [ ] Configure Delta Lake storage.
+- [ ] Initialize the dbt project.
+- [ ] Develop analytical dbt models.
+- [ ] Implement dbt data quality tests.
+- [ ] Generate dbt documentation.
+- [ ] Validate end-to-end pipeline execution.
+- [ ] Document the complete architecture.
 
-AdventWork Commercial Data Lakehouse
+---
 
-From operational data to trusted business insights.
+## Project Vision
+
+The vision of the **AdventWork Commercial Data Lakehouse** is to build a reliable commercial data foundation that transforms operational business data into structured, trusted, and actionable insights.
+
+By combining Azure Data Factory, Azure Databricks, PySpark, Delta Lake, and dbt, the platform aims to establish a scalable data engineering solution following modern cloud data architecture principles.
+
+The ultimate goal is to provide a centralized and trustworthy data environment that supports commercial analytics, business intelligence, and data-driven decision-making.
+
+---
+
+## Conclusion
+
+The AdventWork Commercial Data Lakehouse demonstrates an end-to-end approach to modern Azure Data Engineering.
+
+Through automated ingestion, distributed processing, layered data transformation, and analytical modeling, the solution establishes a foundation for reliable and scalable commercial data management.
+
+**From operational data to trusted business insights.**
+
+---
+
+*AdventWork Commercial Data Lakehouse — Modern Azure Data Engineering.*
