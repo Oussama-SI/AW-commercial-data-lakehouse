@@ -1,5 +1,6 @@
 .vscode
-dbt/profile.yml
+dbt/profiles.yml
+logs/
 
 # Distribution / packaging
 .Python
@@ -20,8 +21,8 @@ pip-log.txt
 # unit test
 cover/
 
+.venv
 .env
-env/
 
 # Streamlit
 .streamlit/secrets.toml
