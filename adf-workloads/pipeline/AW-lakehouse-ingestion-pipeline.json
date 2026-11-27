@@ -116,6 +116,32 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "CreateExternalTable",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "GetCommercialDataToADLS2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.1:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"notebookPath": "/Users/oussamabourrous2002@gmail.com/create-externale-table"
+							},
+							"linkedServiceName": {
+								"referenceName": "sbx_webilllian_training",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
