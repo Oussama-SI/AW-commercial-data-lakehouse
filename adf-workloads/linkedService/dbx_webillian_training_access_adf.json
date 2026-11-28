@@ -1,0 +1,10 @@
+{
+	"name": "dbx_webillian_training_access_adf",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-dbx-trining.vault.azure.net/"
+		}
+	}
+}
